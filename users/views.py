@@ -15,6 +15,9 @@ class UserPermission(permissions.BasePermission):
             return request.user.is_authenticated
         
         return False
+        
+    def has_object_permission(self, request, view, obj):
+        return obj.id == request.user.id or request.user.is_superuser
 
 # API endpoint that allows users to be viewed or edited.
 class UserViewSet(viewsets.ModelViewSet):
