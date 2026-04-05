@@ -24,8 +24,11 @@ from users import views
 router = routers.DefaultRouter()
 router.register(r"users", views.UserViewSet)
 
+register = views.UserViewSet.as_view({"post": "create"})
+
 urlpatterns = [
     path("", include(router.urls)),
+    path("auth/register/", register, name="register"),
     path('admin/', admin.site.urls),
     path("api-auth/", include("rest_framework.urls")),  
 ]
