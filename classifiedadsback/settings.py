@@ -34,7 +34,10 @@ REST_FRAMEWORK = {
     "PAGE_SIZE": 10,
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.IsAuthenticated',
-    ]
+    ],
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ],
 }
 
 CORS_ORIGIN_ALLOW_ALL=True
@@ -67,6 +70,10 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+SIMPLE_JWT = {
+    "USER_ID_FIELD": "email",
+}
 
 ROOT_URLCONF = 'classifiedadsback.urls'
 
