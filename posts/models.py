@@ -9,7 +9,7 @@ class Category(models.Model):
 class Post(models.Model):
     creator = models.ForeignKey(User, on_delete=models.CASCADE)
     title = models.CharField(max_length=200)
-    text = models.TextField
+    text = models.TextField(max_length=1000, blank=True)
     status = models.BooleanField(default=False)
-    creation_date = models.DateField
-    categories = models.ManyToManyField(Category)
+    creation_date = models.DateField(null=True)
+    categories = models.ManyToManyField(Category, blank=True)
