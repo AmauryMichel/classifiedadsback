@@ -23,12 +23,14 @@ from rest_framework_simplejwt.views import (
     TokenRefreshView,
 )
 
-from users import views
+from users.views import UserViewSet
+from posts.views import PostViewSet
 
 router = routers.DefaultRouter()
-router.register(r"users", views.UserViewSet)
+router.register(r"users", UserViewSet)
+router.register(r"posts", PostViewSet)
 
-register = views.UserViewSet.as_view({"post": "create"})
+register = UserViewSet.as_view({"post": "create"})
 
 urlpatterns = [
     path("", include(router.urls)),
