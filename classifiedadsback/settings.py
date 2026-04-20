@@ -73,6 +73,7 @@ MIDDLEWARE = [
 
 SIMPLE_JWT = {
     "USER_ID_FIELD": "email",
+    "TOKEN_OBTAIN_SERIALIZER": "classifiedadsback.token_serializer.MyTokenObtainPairSerializer",
 }
 
 ROOT_URLCONF = 'classifiedadsback.urls'
