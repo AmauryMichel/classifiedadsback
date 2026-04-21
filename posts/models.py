@@ -10,6 +10,6 @@ class Post(models.Model):
     creator = models.ForeignKey(User, on_delete=models.CASCADE, related_name='posts')
     title = models.CharField(max_length=200)
     text = models.TextField(max_length=1000, blank=True)
-    status = models.BooleanField(default=False)
+    active = models.BooleanField(default=False)
     creation_date = models.DateField(null=True)
     categories = models.ManyToManyField(Category, blank=True)
