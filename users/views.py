@@ -14,7 +14,7 @@ class UserPermission(permissions.BasePermission):
         
         if view.action == 'create':
             return True
-        elif view.action in ['list', 'update', 'partial_update', 'destroy']:
+        elif view.action in ['list', 'update', 'partial_update', 'destroy', 'posts']:
             return request.user.is_authenticated
         
         return False
@@ -22,7 +22,6 @@ class UserPermission(permissions.BasePermission):
     def has_object_permission(self, request, view, obj):
         return obj.id == request.user.id or request.user.is_superuser
 
-# API endpoint that allows users to be viewed or edited.
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
