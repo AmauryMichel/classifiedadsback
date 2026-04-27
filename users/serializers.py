@@ -3,7 +3,7 @@ from django.contrib.auth.hashers import make_password
 
 from users.models import User
 
-class UserSerializer(serializers.HyperlinkedModelSerializer):
+class UserSerializer(serializers.ModelSerializer):
     permission_classes = []
 
     password = serializers.CharField(
