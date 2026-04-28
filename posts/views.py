@@ -10,6 +10,13 @@ from posts.serializers import PostSerializer
 
 class PostPermission(permissions.BasePermission):      
     def has_permission(self, request, view):
+        if request.user.is_superuser:            
+            return True
+
+        if view.action == 'create':
+            # Check if user ID matches the request's creator's ID 
+            return 'creator' in request.data and request.data['creator'] == request.user.id
+        
         return request.user.is_authenticated
 
     def has_object_permission(self, request, view, obj):
