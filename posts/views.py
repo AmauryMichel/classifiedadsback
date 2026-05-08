@@ -1,11 +1,8 @@
 from django.shortcuts import render
 from rest_framework import permissions, viewsets
-from rest_framework.response import Response
-from rest_framework_simplejwt.tokens import RefreshToken
-from rest_framework_simplejwt.exceptions import AuthenticationFailed
 
-from posts.models import Post
-from posts.serializers import PostSerializer
+from posts.models import Post, Category
+from posts.serializers import PostSerializer, CategorySerializer
 
 
 class PostPermission(permissions.BasePermission):      
@@ -26,3 +23,17 @@ class PostViewSet(viewsets.ModelViewSet):
     queryset = Post.objects.all()
     serializer_class = PostSerializer
     permission_classes = [PostPermission]
+
+
+
+class CategoryPermission(permissions.BasePermission):
+    def has_permission(self, request, view):
+        if view.action == 'list':
+            return True
+        
+        return request.user.is_superuser
+
+class CategoryViewSet(viewsets.ModelViewSet):
+    queryset = Category.objects.all()
+    serializer_class = CategorySerializer
+    permission_classes = [CategoryPermission]
