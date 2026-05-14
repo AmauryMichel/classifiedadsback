@@ -17,7 +17,12 @@ class PostPermission(permissions.BasePermission):
         return request.user.is_authenticated
 
     def has_object_permission(self, request, view, obj):
-        return obj.creator == request.user or request.user.is_superuser
+        # Only allow creator or admin to edit a post
+        if view.action in ['update', 'partial_update', 'destroy']:
+            return obj.creator == request.user or request.user.is_superuser
+        else:
+            return request.user.is_authenticated
+
     
 class PostViewSet(viewsets.ModelViewSet):
     queryset = Post.objects.all()
